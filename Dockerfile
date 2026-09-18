@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
 # Copia o arquivo de solução e os arquivos de projeto individualmente para otimizar o cache de camadas
-COPY ["ECommerce.sln", "./"]
+COPY ["ECommerce.slnx", "./"]
 COPY ["ECommerce.Domain/ECommerce.Domain.csproj", "ECommerce.Domain/"]
 COPY ["ECommerce.Application/ECommerce.Application.csproj", "ECommerce.Application/"]
 COPY ["ECommerce.Infrastructure/ECommerce.Infrastructure.csproj", "ECommerce.Infrastructure/"]
@@ -12,7 +12,7 @@ COPY ["ECommerce.Tests.Unit/ECommerce.Tests.Unit.csproj", "ECommerce.Tests.Unit/
 COPY ["ECommerce.Tests.Integration/ECommerce.Tests.Integration.csproj", "ECommerce.Tests.Integration/"]
 
 # Restaura as dependências NuGet de todos os projetos
-RUN dotnet restore "ECommerce.sln"
+RUN dotnet restore "ECommerce.slnx"
 
 # Copia todo o restante do código fonte
 COPY . .
