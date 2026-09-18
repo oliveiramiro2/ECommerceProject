@@ -1,3 +1,8 @@
+using FluentValidation;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using ECommerce.Application.Common.Behaviors;
+
 namespace ECommerce.Application;
 
 public static class DependencyInjection

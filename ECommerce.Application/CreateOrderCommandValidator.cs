@@ -1,3 +1,5 @@
+using FluentValidation;
+
 namespace ECommerce.Application.Orders.Commands;
 
 public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>

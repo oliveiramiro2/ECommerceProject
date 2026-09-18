@@ -1,3 +1,7 @@
+using ECommerce.Domain.Orders;
+using ECommerce.Domain.ValueObjects;
+using MediatR;
+
 namespace ECommerce.Application.Orders.Commands;
 
 public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Guid>

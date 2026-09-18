@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.Http.Json;
 using FluentAssertions;
 using Xunit;
+using System.Text.Json;
 
 namespace ECommerce.Tests.Integration;
 
@@ -41,7 +42,8 @@ public class OrdersIntegrationTests : IClassFixture<ECommerceWebApplicationFacto
     // Assert
     response.StatusCode.Should().Be(HttpStatusCode.Created);
 
-    var orderId = await response.Content.ReadFromJsonAsync<Guid>();
+    var jsonResponse = await response.Content.ReadFromJsonAsync<JsonDocument>();
+    var orderId = jsonResponse!.RootElement.GetProperty("orderId").GetGuid();
     orderId.Should().NotBeEmpty();
   }
 }

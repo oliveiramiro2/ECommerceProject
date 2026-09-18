@@ -1,3 +1,5 @@
+using ECommerce.Domain.Orders;
+
 namespace ECommerce.Application.Orders;
 
 public interface IOrderRepository

@@ -2,7 +2,7 @@ namespace ECommerce.Domain.Common;
 
 public abstract class Entity<TId>
 {
-  public TId Id { get; protected set; }
+  public TId? Id { get; protected set; }
 
   public override bool Equals(object? obj)
   {

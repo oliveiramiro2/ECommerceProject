@@ -1,11 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 using ECommerce.Domain.Common;
 using ECommerce.Domain.ValueObjects;
+using ECommerce.Domain.Exceptions;
 
 namespace ECommerce.Domain.Orders;
+
+public record OrderCreatedDomainEvent(Guid OrderId, Guid CustomerId);
+
+public record OrderPaidDomainEvent(Guid OrderId);
+
+public record OrderCancelledDomainEvent(Guid OrderId);
 
 public class Order : ECommerce.Domain.Common.AggregateRoot<Guid>
 {
@@ -13,7 +16,7 @@ public class Order : ECommerce.Domain.Common.AggregateRoot<Guid>
 
   public Guid CustomerId { get; private set; }
   public OrderStatus Status { get; private set; }
-  public ECommerce.Domain.ValueObjects.Money TotalAmount => new(_items.Sum(i => i.TotalPrice.Amount));
+  public Money TotalAmount => new(_items.Sum(i => i.TotalPrice.Amount));
 
   // Propriedade para Concorrência Otimista mapeada no EF Core
   public uint Version { get; private set; }
@@ -32,7 +35,7 @@ public class Order : ECommerce.Domain.Common.AggregateRoot<Guid>
 
   public IReadOnlyCollection<OrderItem> Items => _items.AsReadOnly();
 
-  public void AddItem(Guid productId, string productName, ECommerce.Domain.ValueObjects.Money unitPrice, int quantity)
+  public void AddItem(Guid productId, string productName, Money unitPrice, int quantity)
   {
     if (Status != OrderStatus.Pending)
       throw new DomainException("Não é possível alterar um pedido que não está pendente.");

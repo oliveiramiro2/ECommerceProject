@@ -1,3 +1,5 @@
+using ECommerce.Domain.Exceptions;
+
 namespace ECommerce.Domain.ValueObjects;
 
 public record Money

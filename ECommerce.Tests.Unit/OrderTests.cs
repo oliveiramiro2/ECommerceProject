@@ -1,6 +1,7 @@
 using FluentAssertions;
 using ECommerce.Domain.Orders;
 using ECommerce.Domain.ValueObjects;
+using ECommerce.Domain.Exceptions;
 using Xunit;
 
 namespace ECommerce.Tests.Unit.Domain;
